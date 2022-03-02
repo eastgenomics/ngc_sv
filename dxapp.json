@@ -1,0 +1,87 @@
+{
+  "name": "ngc_sv",
+  "title": "Structural variant (SV) pipeline",
+  "summary": "ngc_sv",
+  "dxapi": "1.0.0",
+  "version": "1.0.0",
+  "inputSpec": [
+    {
+      "name": "input_vcf_files",
+      "label": "VCF files",
+      "class": "array:file",
+      "optional": false,
+      "patterns": ["*.vcf.gz"],
+      "help": ""
+    },
+    {
+      "name": "input_family_file",
+      "label": "file",
+      "class": "file",
+      "optional": false,
+      "patterns": ["*.txt"],
+      "help": ""
+    },
+    {
+      "name": "input_manifest_file",
+      "label": "manifest file",
+      "class": "file",
+      "optional": false,
+      "patterns": ["*.txt"],
+      "help": ""
+    },
+    {
+      "name": "input_sv_bundle",
+      "label": "NGC SV pipeline bundle",
+      "class": "file",
+      "optional": false,
+      "patterns": ["*.tar.gz"],
+      "help": ""
+    },
+    {
+      "name": "sv_docker",
+      "label": "Input NGC SV Docker Image file",
+      "class": "file",
+      "optional": false,
+      "patterns": ["*.tar.gz"],
+      "help": ""
+    }
+  ],
+  "outputSpec": [
+    {
+      "name": "outfiles",
+      "label": "output files",
+      "class": "array:file",
+      "patterns": [
+        "*"
+      ],
+      "help": ""
+    }
+  ],
+  "runSpec": {
+    "timeoutPolicy": {
+      "*": {
+        "hours": 48
+      }
+    },
+    "interpreter": "bash",
+    "file": "src/ngc_sv.sh",
+    "distribution": "Ubuntu",
+    "release": "20.04",
+    "version": "0"
+  },
+  "access": {
+    "network": [
+      "*"
+    ],
+    "project": "CONTRIBUTE"
+  },
+  "regionalOptions": {
+    "aws:eu-central-1": {
+      "systemRequirements": {
+        "*": {
+          "instanceType": "mem1_ssd1_x2"
+        }
+      }
+    }
+  }
+}
