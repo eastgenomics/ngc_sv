@@ -1,0 +1,4 @@
+family_id	ngc_id	father_id	mother_id	gender_declared	affected	ilmn_id	family_size	load_hpc_date	bam_path	vcf_path
+NGC001	NGC001_01	NGC001_02	NGC001_03	M	2	NGC001_01	trio	NA	NA	/myfiles/sv/demo/examples/samples/NGC001_01.vcf.gz
+NGC001	NGC001_02	0	0	F	1	NGC001_02	trio	NA	NA	/myfiles/sv/demo/examples/samples/NGC001_02.vcf.gz
+NGC001	NGC001_03	0	0	M	1	NGC001_03	trio	NA	NA	/myfiles/sv/demo/examples/samples/NGC001_03.vcf.gz
