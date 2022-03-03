@@ -35,24 +35,30 @@ main() {
     echo "files are copied"
 
     #install conda, create, run env
-    wget https://repo.anaconda.com/miniconda/Miniconda-latest-Linux-x86_64.sh \
-    && chmod +x Miniconda-latest-Linux-x86_64.sh \
-    && bash Miniconda-latest-Linux-x86_64.sh -b
-    
-    conda env create -f /home/dnanexus/sv_env.yml
-    
-    conda activate ngc_sv
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
 
+    bash ~/miniconda.sh -b -p $HOME/miniconda
+
+    eval "$(/home/dnanexus/miniconda/bin/conda shell.bash hook)"
+
+    conda init
+
+    conda deactivate
+
+    conda config --set auto_activate_base false
+
+    conda
+
+    conda env create -f /home/dnanexus/sv_env.yml
+
+    conda activate ngc_sv
+    
     #Run sv scripts
     python /home/dnanexus/sv/processSV.py -m /home/dnanexus/sv/demo/examples/manifest.txt -a /home/dnanexus/sv/CONFIG/Analysis.xml -w /home/dnanexus/sv/demo/examples/ -e vcfanno_demo -f /home/dnanexus/sv/demo/examples/family_id.txt -r grch38 -l F -p 20220301
 
     sh /home/dnanexus/sv/demo/examples/20220301/tmp_binaries/NGC001_01.vcfanno_demo.sh
-
-    conda deactivate
     
-    # copy the specifica output dir back to the output dir
-    cp -r /home/dnanexus/sv/demo/examples/20220301/tmp_data/* /home/dnanexus/out/outfiles/
-
+    conda deactivate
     # output 
     dx-upload-all-outputs --parallel
 }
